@@ -1,0 +1,57 @@
+<nav class="navbar">
+  <div class="navbar-left">
+     <h2 class="logo">
+    <img src="/assets/logo2.png" alt="Logo" class="logo-icon">
+    Signéo
+  </h2>
+      
+  </div>
+
+  <div class="navbar-right">
+   <button class="btn-outline" (click)="logout()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+</svg>
+  </button>
+  </div>
+</nav>
+
+<h2 class="page-title">Vocabulaire en Langue des Signes</h2>
+<div class="header-box">
+  <div class="filter-group">
+    <label>Catégorie :</label>
+    <select [(ngModel)]="selectedCategory">
+      <option value="">Toutes</option>
+      <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+    </select>
+  </div>
+
+  <button class="filter-btn" (click)="applyFilter()">Filtrer</button>
+</div>
+
+<div class="cards-grid">
+  <div class="sign-card" *ngFor="let sign of filteredSigns">
+
+    <div class="category-banner">
+      {{ sign.category }}
+    </div>
+
+    <div class="image-wrapper">
+      <img [src]="sign.media" alt="{{ sign.word }}">
+    </div>
+
+    <div class="card-info">
+      <h3>{{ sign.word }}</h3>
+    </div>
+
+  </div>
+</div>
+
+<button class="quiz-launch" routerLink="/quiz">Lancer le Quiz</button>
+<footer class="footer">
+  <p>© 2025 Signéo — Tous droits réservés</p>
+  <p>
+    Contact : <a href="support@signeo.com">support@signeo.com</a>
+  </p>
+</footer>

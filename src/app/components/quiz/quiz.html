@@ -1,0 +1,91 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    <h2 class="logo">
+      <img src="/assets/logo2.png" alt="Logo" class="logo-icon">
+      Signéo
+    </h2>
+  </div>
+
+  <div class="navbar-right">
+   <button class="btn-outline" (click)="logout()">
+    🔒 Déconnexion
+  </button>
+  </div>
+</nav>
+
+
+<div class="container">
+<div class="sidebar">
+<a routerLink="/sign"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5"/>
+</svg></a>
+    <h3> Tests disponibles</h3>
+    <button *ngFor="let c of categories"
+            (click)="startTest(c)"
+            class="test-btn">
+      Test {{ c }}
+      <span class="badge" *ngIf="savedScores[c] >= 0">{{ savedScores[c] }}/5</span>
+    </button>
+
+    <hr>
+
+    <button class="score-btn" (click)="showScoreSummary()">
+      Voir mes scores
+    </button>
+  </div>
+
+  <div class="quiz-area">
+
+    <!-- CR -->
+    <div *ngIf="showResultCard" class="result-card">
+      <h2>{{ selectedCategory }}</h2>
+
+      <div *ngIf="selectedCategory === 'Résumé des scores'">
+        <div class="result-item" *ngFor="let r of resultDetails">
+          <p>{{ r.test }} : <span class="score">{{ r.score }}/5</span></p>
+        </div>
+        <p class="score-total">Score total : {{ score }}/20</p> 
+      </div>
+
+      <div *ngIf="selectedCategory !== 'Résumé des scores'">
+        <div class="result-item" *ngFor="let r of resultDetails">
+          <p>Votre réponse :
+            <span [ngClass]="{'correct': r.selected === r.correct, 'wrong': r.selected !== r.correct}">
+              {{ r.selected }}
+            </span>
+          </p>
+          <p>Bonne réponse : {{ r.correct }}</p>
+        </div>
+        <p class="score-total">Score : {{ score }}/{{ totalQuestions }}</p>
+      </div>
+
+      <button class="btn-primary" (click)="endResultCard()">Terminer</button>
+    </div>
+
+    <!-- Quiz -->
+    <div *ngIf="quizStarted && !showResultCard" class="question-box">
+      <h3>Question {{ questionNumber }} / {{ totalQuestions }}</h3>
+
+      <img *ngIf="currentQuestion"
+           [src]="currentQuestion.media"
+           [alt]="currentQuestion.word"
+           class="sign-image">
+
+      <div class="choices">
+        <button *ngFor="let choice of choices"
+                (click)="selectChoice(choice)">
+          {{ choice }}
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer class="footer">
+  <p>© 2025 Signéo — Tous droits réservés</p>
+  <p>
+    Contact : <a href="support@signeo.com">support@signeo.com</a>
+  </p>
+</footer>

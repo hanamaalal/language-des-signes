@@ -1,0 +1,28 @@
+
+<nav class="navbar">
+  <div class="navbar-left">
+    <h2 class="logo">Signéo</h2>
+  </div>
+
+  <div class="navbar-right">
+    <button class="btn-outline" routerLink="/signin">Se connecter</button>
+    <button class="btn-filled" routerLink="/signup">S’inscrire</button>
+  </div>
+</nav><div class="login-container">
+  <div class="login-card">
+    <h2>Se connecter</h2>
+    <form (ngSubmit)="onLogin()" class="login-form">
+      <input type="email" id="email" [(ngModel)]="email" name="email" placeholder="Nom d'utilisateur ou email" required>
+      <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Mot de passe" required>
+      <button type="submit">Se connecter</button>
+    </form>
+    <p class="signup-link">Nouveau ici ? <a routerLink="/signup">Créer un compte</a></p>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>© 2025 Signéo — Tous droits réservés</p>
+  <p>
+    Contact : <a href="support@signeo.com">support@signeo.com</a>
+  </p>
+</footer>
